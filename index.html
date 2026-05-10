@@ -1,0 +1,1324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Khadyy_ng — Everything Fashion</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pink: #f2a7c3;
+    --pink-deep: #e0749e;
+    --pink-light: #fde8f1;
+    --purple: #9b72cf;
+    --purple-deep: #7c4dbe;
+    --purple-light: #ede0ff;
+    --cream: #fdf8fc;
+    --dark: #1a0a2e;
+    --mid: #3d2060;
+    --text: #2d1b4e;
+    --text-light: #8a6fa8;
+    --white: #ffffff;
+    --gradient: linear-gradient(135deg, #f2a7c3 0%, #c084e0 50%, #9b72cf 100%);
+    --gradient-soft: linear-gradient(135deg, #fde8f1 0%, #ede0ff 100%);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--text); overflow-x: hidden; }
+
+  /* PAGE SYSTEM */
+  .page { display: none; min-height: 100vh; }
+  .page.active { display: block; }
+
+  /* ANNOUNCEMENT */
+  .announcement {
+    background: var(--gradient);
+    color: white;
+    text-align: center;
+    padding: 10px;
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  /* NAV */
+  nav {
+    background: rgba(253,248,252,0.97);
+    backdrop-filter: blur(20px);
+    padding: 16px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid rgba(242,167,195,0.2);
+  }
+
+  .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 600;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 2px;
+    cursor: pointer;
+  }
+
+  .logo span {
+    font-style: italic;
+    font-weight: 300;
+    font-size: 12px;
+    display: block;
+    letter-spacing: 3px;
+    -webkit-text-fill-color: var(--text-light);
+    color: var(--text-light);
+  }
+
+  .nav-links { display: flex; gap: 28px; list-style: none; }
+  .nav-links a {
+    text-decoration: none;
+    color: var(--text);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: color 0.3s;
+    cursor: pointer;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -3px; left: 0;
+    width: 0; height: 1.5px;
+    background: var(--gradient);
+    transition: width 0.3s;
+  }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-links a:hover { color: var(--purple-deep); }
+
+  .nav-right { display: flex; gap: 12px; align-items: center; }
+
+  .cart-indicator {
+    position: relative;
+    cursor: pointer;
+    font-size: 20px;
+    transition: transform 0.2s;
+  }
+  .cart-indicator:hover { transform: scale(1.1); }
+  .cart-count {
+    position: absolute;
+    top: -6px; right: -8px;
+    background: var(--pink-deep);
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .order-btn {
+    background: var(--gradient);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-decoration: none;
+  }
+  .order-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(155,114,207,0.4); }
+
+  /* ===== HOME PAGE ===== */
+  .hero {
+    min-height: 90vh;
+    background: var(--gradient-soft);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 60px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -100px; right: -100px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(242,167,195,0.3) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero-tag {
+    display: inline-block;
+    background: var(--gradient);
+    color: white;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 6px 18px;
+    border-radius: 50px;
+    margin-bottom: 24px;
+    font-weight: 600;
+  }
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 68px;
+    line-height: 1.1;
+    color: var(--dark);
+    font-weight: 300;
+    margin-bottom: 20px;
+  }
+  .hero h1 em {
+    font-style: italic;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero p { color: var(--text-light); font-size: 16px; line-height: 1.7; max-width: 420px; margin-bottom: 36px; }
+  .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+
+  .btn-primary {
+    background: var(--gradient);
+    color: white;
+    padding: 15px 34px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 1px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: inline-block;
+    border: none;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 35px rgba(155,114,207,0.45); }
+
+  .btn-secondary {
+    border: 1.5px solid var(--purple);
+    color: var(--purple-deep);
+    padding: 15px 34px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 1px;
+    transition: all 0.3s;
+    display: inline-block;
+    cursor: pointer;
+    background: transparent;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .btn-secondary:hover { background: var(--purple-light); transform: translateY(-3px); }
+
+  .hero-visual {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    z-index: 1;
+  }
+  .hero-card {
+    border-radius: 20px;
+    overflow: hidden;
+    background: white;
+    box-shadow: 0 15px 40px rgba(155,114,207,0.15);
+    transition: transform 0.3s;
+    aspect-ratio: 3/4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    position: relative;
+    cursor: pointer;
+  }
+  .hero-card:hover { transform: translateY(-8px); }
+  .hero-card:first-child { margin-top: 40px; background: linear-gradient(135deg,#fde8f1,#f2a7c3); }
+  .hero-card:nth-child(2) { background: linear-gradient(135deg,#ede0ff,#c084e0); }
+  .hero-card:nth-child(3) { background: linear-gradient(135deg,#fde8f1,#e0749e); }
+  .hero-card:nth-child(4) { margin-top: -40px; background: linear-gradient(135deg,#ede0ff,#9b72cf); }
+  .hero-card-label {
+    position: absolute;
+    bottom: 12px; left: 12px; right: 12px;
+    background: rgba(255,255,255,0.9);
+    backdrop-filter: blur(10px);
+    padding: 8px 12px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--dark);
+  }
+
+  /* STATS */
+  .stats {
+    background: var(--dark);
+    padding: 50px 80px;
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 30px;
+    text-align: center;
+  }
+  .stat-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 46px;
+    font-weight: 600;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .stat-label { color: rgba(255,255,255,0.6); font-size: 12px; letter-spacing: 2px; text-transform: uppercase; margin-top: 4px; }
+
+  /* SECTION */
+  .section { padding: 80px 80px; }
+  .section-header { text-align: center; margin-bottom: 50px; }
+  .section-tag { display: inline-block; color: var(--pink-deep); font-size: 11px; letter-spacing: 3px; text-transform: uppercase; font-weight: 600; margin-bottom: 10px; }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: 48px; font-weight: 300; color: var(--dark); line-height: 1.2; }
+  .section-title em { font-style: italic; color: var(--purple-deep); }
+
+  /* CATEGORIES GRID (home) */
+  .categories-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 18px; }
+  .category-card {
+    border-radius: 22px;
+    padding: 36px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .category-card:hover { transform: translateY(-8px); box-shadow: 0 20px 50px rgba(155,114,207,0.2); }
+  .cat-bags { background: linear-gradient(135deg,#fde8f1,#fac8de); }
+  .cat-shoes { background: linear-gradient(135deg,#ede0ff,#d4b8f0); }
+  .cat-beauty { background: linear-gradient(135deg,#fde8f1,#e8b4d0); }
+  .cat-accessories { background: linear-gradient(135deg,#ede0ff,#c9a8e8); }
+  .cat-veils { background: linear-gradient(135deg,#fde8f1,#f0c0d5); }
+  .cat-bottles { background: linear-gradient(135deg,#ede0ff,#bda0e0); }
+  .cat-lifestyle { background: linear-gradient(135deg,#fde8f1,#e4afc8); }
+  .cat-sale { background: linear-gradient(135deg,#1a0a2e,#3d2060); }
+  .cat-emoji { font-size: 42px; margin-bottom: 14px; display: block; }
+  .cat-name { font-family: 'Cormorant Garamond', serif; font-size: 21px; font-weight: 600; color: var(--dark); margin-bottom: 5px; }
+  .cat-count { font-size: 11px; color: var(--text-light); letter-spacing: 1px; }
+  .cat-sale .cat-name { color: white; }
+  .cat-sale .cat-count { color: rgba(255,255,255,0.6); }
+
+  /* FEATURED PRODUCTS */
+  .featured { background: white; }
+  .products-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 22px; }
+  .product-card {
+    border-radius: 18px;
+    overflow: hidden;
+    background: var(--cream);
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+  }
+  .product-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(155,114,207,0.2); }
+  .product-img {
+    height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 56px;
+    position: relative;
+    overflow: hidden;
+  }
+  .pi-1 { background: linear-gradient(135deg,#fde8f1,#f2a7c3); }
+  .pi-2 { background: linear-gradient(135deg,#ede0ff,#c084e0); }
+  .pi-3 { background: linear-gradient(135deg,#fde8f1,#e0749e); }
+  .pi-4 { background: linear-gradient(135deg,#ede0ff,#9b72cf); }
+  .pi-5 { background: linear-gradient(135deg,#fde8f1,#f2a7c3); }
+  .pi-6 { background: linear-gradient(135deg,#ede0ff,#c084e0); }
+  .pi-7 { background: linear-gradient(135deg,#fde8f1,#e0749e); }
+  .pi-8 { background: linear-gradient(135deg,#ede0ff,#9b72cf); }
+  .product-badge {
+    position: absolute; top: 12px; left: 12px;
+    background: var(--gradient);
+    color: white; font-size: 10px; font-weight: 700;
+    letter-spacing: 1px; padding: 4px 10px;
+    border-radius: 20px; text-transform: uppercase;
+  }
+  .wishlist-btn {
+    position: absolute; top: 12px; right: 12px;
+    width: 32px; height: 32px;
+    background: white; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    cursor: pointer; transition: transform 0.2s;
+    border: none;
+  }
+  .wishlist-btn:hover { transform: scale(1.15); }
+  .product-info { padding: 16px; }
+  .product-cat { font-size: 10px; color: var(--text-light); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 5px; }
+  .product-name { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 600; color: var(--dark); margin-bottom: 10px; }
+  .product-footer { display: flex; align-items: center; justify-content: space-between; }
+  .product-price { font-size: 16px; font-weight: 700; color: var(--purple-deep); }
+  .product-price s { font-size: 11px; color: var(--text-light); font-weight: 400; margin-left: 5px; }
+  .add-to-cart {
+    background: var(--gradient);
+    border: none; color: white;
+    width: 34px; height: 34px;
+    border-radius: 50%; font-size: 18px;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .add-to-cart:hover { transform: scale(1.1); box-shadow: 0 6px 20px rgba(155,114,207,0.4); }
+
+  /* DELIVERY BANNER */
+  .delivery-banner {
+    background: var(--gradient);
+    padding: 50px 80px;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 30px;
+    text-align: center;
+  }
+  .delivery-item { color: white; }
+  .delivery-icon { font-size: 34px; margin-bottom: 10px; }
+  .delivery-title { font-size: 17px; font-weight: 700; margin-bottom: 5px; }
+  .delivery-text { font-size: 13px; opacity: 0.85; line-height: 1.5; }
+
+  /* TESTIMONIALS */
+  .testimonials { background: var(--gradient-soft); }
+  .testimonials-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 22px; }
+  .testimonial-card { background: white; border-radius: 20px; padding: 30px; box-shadow: 0 8px 30px rgba(155,114,207,0.1); }
+  .stars { color: var(--pink-deep); font-size: 15px; margin-bottom: 12px; }
+  .testimonial-text { font-style: italic; font-family: 'Cormorant Garamond', serif; font-size: 16px; line-height: 1.7; color: var(--text); margin-bottom: 18px; }
+  .testimonial-author { display: flex; align-items: center; gap: 10px; }
+  .author-avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--gradient); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 15px; }
+  .author-name { font-weight: 600; font-size: 13px; color: var(--dark); }
+  .author-location { font-size: 11px; color: var(--text-light); }
+
+  /* HOW TO ORDER */
+  .order-section { background: var(--dark); }
+  .order-section .section-title { color: white; }
+  .steps-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 28px; }
+  .step-card { text-align: center; }
+  .step-num { width: 70px; height: 70px; border-radius: 50%; background: var(--gradient); display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 600; color: white; margin: 0 auto 18px; box-shadow: 0 8px 25px rgba(155,114,207,0.4); }
+  .step-title { font-family: 'Cormorant Garamond', serif; font-size: 19px; color: white; margin-bottom: 8px; }
+  .step-text { color: rgba(255,255,255,0.6); font-size: 13px; line-height: 1.6; }
+
+  /* NEWSLETTER */
+  .newsletter { background: var(--pink-light); padding: 70px 80px; text-align: center; }
+  .newsletter h2 { font-family: 'Cormorant Garamond', serif; font-size: 42px; font-weight: 300; color: var(--dark); margin-bottom: 10px; }
+  .newsletter p { color: var(--text-light); margin-bottom: 30px; font-size: 15px; }
+  .newsletter-form { display: flex; max-width: 460px; margin: 0 auto; border-radius: 50px; overflow: hidden; box-shadow: 0 8px 30px rgba(155,114,207,0.2); }
+  .newsletter-form input { flex: 1; padding: 16px 22px; border: none; font-size: 13px; font-family: 'DM Sans', sans-serif; outline: none; background: white; }
+  .newsletter-form button { background: var(--gradient); color: white; border: none; padding: 16px 28px; font-size: 12px; font-weight: 700; letter-spacing: 1px; cursor: pointer; font-family: 'DM Sans', sans-serif; text-transform: uppercase; }
+
+  /* FOOTER */
+  footer { background: var(--dark); padding: 60px 80px 28px; color: rgba(255,255,255,0.7); }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+  .footer-brand p { font-size: 13px; line-height: 1.7; margin-bottom: 20px; color: rgba(255,255,255,0.5); margin-top: 12px; }
+  .social-links { display: flex; gap: 10px; }
+  .social-link { width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center; font-size: 15px; text-decoration: none; transition: background 0.3s, transform 0.2s; }
+  .social-link:hover { background: var(--gradient); transform: translateY(-3px); }
+  .footer-col h4 { color: white; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 18px; font-weight: 600; }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 9px; }
+  .footer-col ul li a { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 13px; transition: color 0.3s; cursor: pointer; }
+  .footer-col ul li a:hover { color: var(--pink); }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: rgba(255,255,255,0.3); }
+  .footer-bottom span { background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 600; }
+
+  /* WHATSAPP FLOAT */
+  .whatsapp-float {
+    position: fixed; bottom: 28px; right: 28px;
+    width: 54px; height: 54px;
+    background: #25d366; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px; text-decoration: none;
+    box-shadow: 0 6px 25px rgba(37,211,102,0.4);
+    z-index: 999;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%,100% { box-shadow: 0 6px 25px rgba(37,211,102,0.4); }
+    50% { box-shadow: 0 6px 35px rgba(37,211,102,0.7); }
+  }
+
+  /* ===== CATEGORY PAGE ===== */
+  .cat-page-header {
+    padding: 60px 80px 40px;
+    background: var(--gradient-soft);
+    position: relative;
+    overflow: hidden;
+  }
+  .cat-page-header::before {
+    content: '';
+    position: absolute; top: -80px; right: -80px;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(242,167,195,0.3) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .breadcrumb { font-size: 12px; color: var(--text-light); margin-bottom: 16px; letter-spacing: 1px; }
+  .breadcrumb span { color: var(--purple-deep); cursor: pointer; }
+  .breadcrumb span:hover { text-decoration: underline; }
+  .cat-page-title { font-family: 'Cormorant Garamond', serif; font-size: 56px; font-weight: 300; color: var(--dark); margin-bottom: 8px; }
+  .cat-page-title em { font-style: italic; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .cat-page-sub { color: var(--text-light); font-size: 15px; }
+
+  .cat-page-body { padding: 50px 80px; background: white; }
+  .cat-filters { display: flex; gap: 10px; margin-bottom: 36px; flex-wrap: wrap; align-items: center; }
+  .cat-filter-label { font-size: 12px; color: var(--text-light); letter-spacing: 1px; text-transform: uppercase; margin-right: 6px; }
+  .filter-btn {
+    padding: 8px 18px; border-radius: 50px;
+    border: 1.5px solid rgba(155,114,207,0.3);
+    background: transparent; color: var(--text);
+    font-size: 12px; cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: all 0.2s;
+  }
+  .filter-btn:hover, .filter-btn.active { background: var(--gradient); color: white; border-color: transparent; }
+  .cat-products-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 22px; }
+
+  /* ===== ORDER MODAL ===== */
+  .modal-overlay {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(26,10,46,0.7);
+    backdrop-filter: blur(6px);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: white;
+    border-radius: 28px;
+    padding: 48px;
+    max-width: 540px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    animation: modalIn 0.3s ease;
+  }
+  @keyframes modalIn { from { opacity: 0; transform: scale(0.9) translateY(20px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+  .modal-close {
+    position: absolute; top: 20px; right: 20px;
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--cream); border: none;
+    font-size: 18px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s;
+  }
+  .modal-close:hover { background: var(--pink-light); }
+  .modal-tag { display: inline-block; background: var(--gradient); color: white; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; padding: 5px 14px; border-radius: 50px; margin-bottom: 16px; font-weight: 600; }
+  .modal-title { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 300; color: var(--dark); margin-bottom: 6px; line-height: 1.2; }
+  .modal-title em { font-style: italic; color: var(--purple-deep); }
+  .modal-subtitle { color: var(--text-light); font-size: 14px; margin-bottom: 28px; line-height: 1.5; }
+
+  /* CART SECTION IN MODAL */
+  .cart-items { border: 1px solid rgba(155,114,207,0.15); border-radius: 16px; padding: 16px; margin-bottom: 24px; max-height: 200px; overflow-y: auto; }
+  .cart-item { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid rgba(155,114,207,0.1); }
+  .cart-item:last-child { border-bottom: none; }
+  .cart-item-emoji { font-size: 28px; width: 44px; height: 44px; background: var(--gradient-soft); border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .cart-item-info { flex: 1; }
+  .cart-item-name { font-weight: 600; font-size: 14px; color: var(--dark); }
+  .cart-item-price { font-size: 12px; color: var(--purple-deep); font-weight: 600; }
+  .cart-item-remove { background: none; border: none; color: var(--text-light); cursor: pointer; font-size: 16px; padding: 4px; }
+  .cart-item-remove:hover { color: #e74c3c; }
+  .cart-empty { text-align: center; padding: 20px; color: var(--text-light); font-size: 14px; }
+
+  .order-form-label { font-size: 12px; font-weight: 600; color: var(--text); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; display: block; }
+  .order-form-group { margin-bottom: 18px; }
+  .order-input {
+    width: 100%; padding: 13px 16px;
+    border: 1.5px solid rgba(155,114,207,0.25);
+    border-radius: 12px; font-size: 14px;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text); outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    background: white;
+  }
+  .order-input:focus { border-color: var(--purple); box-shadow: 0 0 0 3px rgba(155,114,207,0.1); }
+  .order-input::placeholder { color: var(--text-light); }
+
+  .order-method-tabs { display: flex; gap: 8px; margin-bottom: 22px; }
+  .method-tab {
+    flex: 1; padding: 12px; border-radius: 12px;
+    border: 1.5px solid rgba(155,114,207,0.2);
+    background: transparent; cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px; font-weight: 500;
+    color: var(--text-light);
+    transition: all 0.2s; text-align: center;
+  }
+  .method-tab.active { background: var(--gradient); color: white; border-color: transparent; }
+  .method-tab:hover:not(.active) { border-color: var(--purple); color: var(--purple-deep); }
+
+  .order-summary { background: var(--gradient-soft); border-radius: 16px; padding: 18px; margin-bottom: 22px; }
+  .order-summary-row { display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 8px; }
+  .order-summary-row:last-child { margin-bottom: 0; font-weight: 700; color: var(--dark); border-top: 1px solid rgba(155,114,207,0.2); padding-top: 8px; }
+  .order-summary-row span:last-child { color: var(--purple-deep); font-weight: 600; }
+
+  .submit-order {
+    width: 100%; padding: 16px;
+    background: var(--gradient); color: white;
+    border: none; border-radius: 50px;
+    font-size: 14px; font-weight: 700;
+    letter-spacing: 1px; text-transform: uppercase;
+    cursor: pointer; font-family: 'DM Sans', sans-serif;
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin-bottom: 12px;
+  }
+  .submit-order:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(155,114,207,0.4); }
+
+  .dm-link-btn {
+    width: 100%; padding: 14px;
+    background: transparent; color: var(--purple-deep);
+    border: 1.5px solid var(--purple);
+    border-radius: 50px; font-size: 13px; font-weight: 600;
+    cursor: pointer; font-family: 'DM Sans', sans-serif;
+    transition: all 0.2s; text-decoration: none;
+    display: block; text-align: center;
+  }
+  .dm-link-btn:hover { background: var(--purple-light); }
+
+  .order-note { font-size: 11px; color: var(--text-light); text-align: center; margin-top: 12px; line-height: 1.5; }
+
+  /* SUCCESS STATE */
+  .order-success { text-align: center; padding: 20px 0; }
+  .success-icon { font-size: 60px; margin-bottom: 16px; }
+  .success-title { font-family: 'Cormorant Garamond', serif; font-size: 36px; color: var(--dark); margin-bottom: 10px; }
+  .success-text { color: var(--text-light); font-size: 14px; line-height: 1.6; margin-bottom: 24px; }
+
+  /* PRODUCT DETAIL MODAL */
+  .product-detail { display: flex; flex-direction: column; gap: 16px; }
+  .product-detail-img { height: 220px; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 72px; }
+  .product-detail-cat { font-size: 11px; color: var(--text-light); letter-spacing: 2px; text-transform: uppercase; }
+  .product-detail-name { font-family: 'Cormorant Garamond', serif; font-size: 30px; font-weight: 600; color: var(--dark); line-height: 1.2; }
+  .product-detail-price { font-size: 22px; font-weight: 700; color: var(--purple-deep); }
+  .product-detail-desc { font-size: 14px; color: var(--text-light); line-height: 1.7; }
+  .product-detail-btns { display: flex; gap: 10px; }
+  .product-detail-btns .btn-primary { flex: 1; text-align: center; }
+  .product-detail-btns .btn-secondary { flex: 1; text-align: center; }
+
+  /* CART SIDEBAR */
+  .cart-sidebar {
+    position: fixed; top: 0; right: -420px;
+    width: 420px; height: 100vh;
+    background: white;
+    box-shadow: -10px 0 50px rgba(26,10,46,0.15);
+    z-index: 200;
+    transition: right 0.4s ease;
+    display: flex; flex-direction: column;
+  }
+  .cart-sidebar.open { right: 0; }
+  .cart-sidebar-header { padding: 28px 28px 20px; border-bottom: 1px solid rgba(155,114,207,0.1); display: flex; align-items: center; justify-content: space-between; }
+  .cart-sidebar-title { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 300; color: var(--dark); }
+  .cart-sidebar-body { flex: 1; overflow-y: auto; padding: 20px 28px; }
+  .cart-sidebar-footer { padding: 20px 28px; border-top: 1px solid rgba(155,114,207,0.1); }
+  .cart-total { display: flex; justify-content: space-between; font-size: 16px; font-weight: 700; color: var(--dark); margin-bottom: 16px; }
+  .cart-total span:last-child { color: var(--purple-deep); }
+
+  .cart-sidebar-item { display: flex; gap: 14px; align-items: center; padding: 14px 0; border-bottom: 1px solid rgba(155,114,207,0.08); }
+  .cart-sidebar-emoji { font-size: 30px; width: 52px; height: 52px; background: var(--gradient-soft); border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .cart-sidebar-info { flex: 1; }
+  .cart-sidebar-name { font-weight: 600; font-size: 14px; color: var(--dark); margin-bottom: 3px; }
+  .cart-sidebar-price { font-size: 13px; color: var(--purple-deep); font-weight: 600; }
+  .qty-control { display: flex; align-items: center; gap: 8px; margin-top: 6px; }
+  .qty-btn { width: 24px; height: 24px; border-radius: 50%; border: 1px solid rgba(155,114,207,0.3); background: transparent; cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center; color: var(--text); transition: all 0.2s; }
+  .qty-btn:hover { background: var(--gradient); color: white; border-color: transparent; }
+  .qty-num { font-size: 14px; font-weight: 600; color: var(--dark); min-width: 20px; text-align: center; }
+
+  .overlay-bg {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(26,10,46,0.4);
+    z-index: 150;
+  }
+  .overlay-bg.open { display: block; }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+  .fade-up { animation: fadeUp 0.6s ease forwards; }
+
+  /* MOBILE */
+  @media (max-width: 768px) {
+    nav { padding: 14px 18px; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; padding: 36px 22px; min-height: auto; }
+    .hero h1 { font-size: 42px; }
+    .hero-visual { grid-template-columns: repeat(2,1fr); margin-top: 36px; }
+    .section { padding: 50px 22px; }
+    .categories-grid { grid-template-columns: repeat(2,1fr); }
+    .products-grid, .cat-products-grid { grid-template-columns: repeat(2,1fr); }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .steps-grid { grid-template-columns: repeat(2,1fr); }
+    .stats { grid-template-columns: repeat(2,1fr); padding: 36px 22px; }
+    .delivery-banner { grid-template-columns: 1fr; padding: 36px 22px; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .newsletter { padding: 50px 22px; }
+    footer { padding: 40px 22px 22px; }
+    .cat-page-header, .cat-page-body { padding: 40px 22px; }
+    .modal { padding: 30px 24px; }
+    .cart-sidebar { width: 100%; right: -100%; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Announcement -->
+<div class="announcement">
+  🚚 Delivery Every Saturday & Tuesday — Zaria, Kaduna &nbsp;|&nbsp; DM to Order &nbsp;|&nbsp; 📱 @khadyy_ng
+</div>
+
+<!-- Nav -->
+<nav>
+  <div class="logo" onclick="goHome()">
+    Khadyy_ng
+    <span>Everything Fashion</span>
+  </div>
+  <ul class="nav-links">
+    <li><a onclick="goHome(); scrollTo('#categories')">Shop</a></li>
+    <li><a onclick="showCategoryPage('bags')">Bags</a></li>
+    <li><a onclick="showCategoryPage('shoes')">Shoes</a></li>
+    <li><a onclick="showCategoryPage('beauty')">Beauty</a></li>
+    <li><a onclick="goHome(); scrollTo('#how-to-order')">How to Order</a></li>
+    <li><a onclick="goHome(); scrollTo('#testimonials')">Reviews</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="cart-indicator" onclick="toggleCart()">
+      🛍️
+      <div class="cart-count" id="cartCount">0</div>
+    </div>
+    <button class="order-btn" onclick="openOrderModal()">Order Now</button>
+  </div>
+</nav>
+
+<!-- ===== HOME PAGE ===== -->
+<div class="page active" id="homePage">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-text fade-up">
+      <div class="hero-tag">✨ New Collection Available</div>
+      <h1>Style That<br><em>Speaks</em><br>For You</h1>
+      <p>Premium bags, shoes, beauty, veils & lifestyle essentials — curated with love and delivered to your door. Based in Zaria, Kaduna.</p>
+      <div class="hero-btns">
+        <button class="btn-primary" onclick="document.getElementById('categories').scrollIntoView({behavior:'smooth'})">Shop Collections</button>
+        <a href="https://instagram.com/khadyy_ng" target="_blank" class="btn-secondary">📸 View Instagram</a>
+      </div>
+    </div>
+    <div class="hero-visual fade-up">
+      <div class="hero-card" onclick="showCategoryPage('bags')">👜<div class="hero-card-label">Premium Bags</div></div>
+      <div class="hero-card" onclick="showCategoryPage('shoes')">🩴<div class="hero-card-label">Trendy Shoes</div></div>
+      <div class="hero-card" onclick="showCategoryPage('beauty')">💄<div class="hero-card-label">Beauty & Skincare</div></div>
+      <div class="hero-card" onclick="showCategoryPage('veils')">🧣<div class="hero-card-label">Veils & Hijabs</div></div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="stats">
+    <div class="stat-item"><div class="stat-number">16.1K</div><div class="stat-label">Followers</div></div>
+    <div class="stat-item"><div class="stat-number">455+</div><div class="stat-label">Products Listed</div></div>
+    <div class="stat-item"><div class="stat-number">100%</div><div class="stat-label">Verified Reviews</div></div>
+    <div class="stat-item"><div class="stat-number">2×</div><div class="stat-label">Weekly Delivery</div></div>
+  </section>
+
+  <!-- Categories -->
+  <section class="section" id="categories">
+    <div class="section-header">
+      <div class="section-tag">Browse By Category</div>
+      <h2 class="section-title">Shop Our <em>Collections</em></h2>
+    </div>
+    <div class="categories-grid">
+      <div class="category-card cat-bags" onclick="showCategoryPage('bags')"><span class="cat-emoji">👜</span><div class="cat-name">Bags</div><div class="cat-count">Totes · Handbags · Backpacks</div></div>
+      <div class="category-card cat-shoes" onclick="showCategoryPage('shoes')"><span class="cat-emoji">🩴</span><div class="cat-name">Shoes</div><div class="cat-count">Slippers · Sandals · Flats</div></div>
+      <div class="category-card cat-beauty" onclick="showCategoryPage('beauty')"><span class="cat-emoji">💆‍♀️</span><div class="cat-name">Beauty</div><div class="cat-count">Skincare · Haircare · Body</div></div>
+      <div class="category-card cat-accessories" onclick="showCategoryPage('accessories')"><span class="cat-emoji">🕶️</span><div class="cat-name">Accessories</div><div class="cat-count">Sunglasses · Jewellery</div></div>
+      <div class="category-card cat-veils" onclick="showCategoryPage('veils')"><span class="cat-emoji">🧣</span><div class="cat-name">Veils & Hijabs</div><div class="cat-count">Dubai Jersey · Silk · Cotton</div></div>
+      <div class="category-card cat-bottles" onclick="showCategoryPage('bottles')"><span class="cat-emoji">🍵</span><div class="cat-name">Bottles & Tumblers</div><div class="cat-count">Stanley · Cute Cups · Flasks</div></div>
+      <div class="category-card cat-lifestyle" onclick="showCategoryPage('lifestyle')"><span class="cat-emoji">🌸</span><div class="cat-name">Lifestyle</div><div class="cat-count">Stationery · Mirrors · Gifts</div></div>
+      <div class="category-card cat-sale" onclick="showCategoryPage('sale')"><span class="cat-emoji">🏷️</span><div class="cat-name">Sale Items</div><div class="cat-count">Up to 40% Off Selected</div></div>
+    </div>
+  </section>
+
+  <!-- Featured Products -->
+  <section class="section featured" id="featured">
+    <div class="section-header">
+      <div class="section-tag">Just Arrived</div>
+      <h2 class="section-title">New <em>Drops</em> This Week</h2>
+    </div>
+    <div class="products-grid" id="featuredGrid"></div>
+  </section>
+
+  <!-- Delivery Banner -->
+  <div class="delivery-banner">
+    <div class="delivery-item"><div class="delivery-icon">🚚</div><div class="delivery-title">Twice Weekly Delivery</div><div class="delivery-text">Every Saturday & Tuesday — Zaria, Kaduna. Nationwide available.</div></div>
+    <div class="delivery-item"><div class="delivery-icon">✅</div><div class="delivery-title">Verified Products</div><div class="delivery-text">Every item personally inspected before it reaches you.</div></div>
+    <div class="delivery-item"><div class="delivery-icon">💬</div><div class="delivery-title">DM to Order</div><div class="delivery-text">Simple ordering via Instagram DM or right here on the website.</div></div>
+  </div>
+
+  <!-- How to Order -->
+  <section class="section order-section" id="how-to-order">
+    <div class="section-header">
+      <div class="section-tag" style="color:var(--pink);">Simple Process</div>
+      <h2 class="section-title">How to <em>Order</em></h2>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card"><div class="step-num">1</div><div class="step-title">Browse Products</div><div class="step-text">Scroll through categories to find what you love. Add items to your cart.</div></div>
+      <div class="step-card"><div class="step-num">2</div><div class="step-title">Place Order</div><div class="step-text">Fill in your details directly on the website or send a DM to @khadyy_ng on Instagram.</div></div>
+      <div class="step-card"><div class="step-num">3</div><div class="step-title">Confirm & Pay</div><div class="step-text">We'll confirm availability and send payment details. Bank transfer accepted.</div></div>
+      <div class="step-card"><div class="step-num">4</div><div class="step-title">Receive & Slay</div><div class="step-text">Your order ships Saturday or Tuesday. Enjoy your new items!</div></div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="section testimonials" id="testimonials">
+    <div class="section-header">
+      <div class="section-tag">Client Reviews</div>
+      <h2 class="section-title">What Customers <em>Say</em></h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card"><div class="stars">⭐⭐⭐⭐⭐</div><div class="testimonial-text">"I ordered the tote bag and it arrived in perfect condition. Khadyy packs everything so neatly. Will definitely order again!"</div><div class="testimonial-author"><div class="author-avatar">A</div><div><div class="author-name">Aisha M.</div><div class="author-location">Kaduna</div></div></div></div>
+      <div class="testimonial-card"><div class="stars">⭐⭐⭐⭐⭐</div><div class="testimonial-text">"The slippers I got are so beautiful and comfortable. She responds fast and delivery was on time. 100% recommended!"</div><div class="testimonial-author"><div class="author-avatar">F</div><div><div class="author-name">Fatima H.</div><div class="author-location">Zaria</div></div></div></div>
+      <div class="testimonial-card"><div class="stars">⭐⭐⭐⭐⭐</div><div class="testimonial-text">"Been buying from Khadyy for months. Quality is always consistent and she's very honest about her products. My go-to shop!"</div><div class="testimonial-author"><div class="author-avatar">Z</div><div><div class="author-name">Zainab K.</div><div class="author-location">Abuja</div></div></div></div>
+    </div>
+  </section>
+
+  <!-- Newsletter -->
+  <section class="newsletter">
+    <h2>Stay in the <em style="font-family:'Cormorant Garamond',serif;color:var(--purple-deep);">Loop</em></h2>
+    <p>Get notified when new collections drop. No spam, just fashion.</p>
+    <div class="newsletter-form">
+      <input type="email" placeholder="Enter your email address...">
+      <button onclick="alert('Thank you! You\'ll be notified of new drops 💜')">Notify Me</button>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo" style="display:block">Khadyy_ng<span>Everything Fashion</span></div>
+        <p>Your favourite online fashion store based in Zaria, Kaduna. Premium bags, shoes, beauty & lifestyle — curated with love.</p>
+        <div class="social-links">
+          <a href="https://instagram.com/khadyy_ng" target="_blank" class="social-link">📸</a>
+          <a href="https://tiktok.com/@khadyy_ng" target="_blank" class="social-link">🎵</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <ul>
+          <li><a onclick="showCategoryPage('bags')">Bags</a></li>
+          <li><a onclick="showCategoryPage('shoes')">Shoes & Slippers</a></li>
+          <li><a onclick="showCategoryPage('beauty')">Beauty & Skincare</a></li>
+          <li><a onclick="showCategoryPage('veils')">Veils & Hijabs</a></li>
+          <li><a onclick="showCategoryPage('accessories')">Accessories</a></li>
+          <li><a onclick="showCategoryPage('bottles')">Bottles & Tumblers</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Info</h4>
+        <ul>
+          <li><a onclick="document.getElementById('how-to-order').scrollIntoView({behavior:'smooth'})">How to Order</a></li>
+          <li><a>Delivery Info</a></li>
+          <li><a>Returns Policy</a></li>
+          <li><a>FAQs</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="https://instagram.com/khadyy_ng" target="_blank">📸 @khadyy_ng</a></li>
+          <li><a>📍 Zaria, Kaduna</a></li>
+          <li><a>🚚 Sat & Tue Delivery</a></li>
+          <li><a onclick="openOrderModal()">✉️ Place an Order</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 <span>Khadyy_ng</span>. All rights reserved.</div>
+      <div>Made with 💜 for <span>Khadijah Hashim Muhammad</span></div>
+    </div>
+  </footer>
+
+</div><!-- end homePage -->
+
+<!-- ===== CATEGORY PAGE ===== -->
+<div class="page" id="categoryPage">
+  <div class="cat-page-header">
+    <div class="breadcrumb"><span onclick="goHome()">Home</span> › <span id="catBreadcrumb">Bags</span></div>
+    <h1 class="cat-page-title" id="catPageTitle">Premium <em>Bags</em></h1>
+    <p class="cat-page-sub" id="catPageSub">Totes, handbags, backpacks and more — curated with style</p>
+  </div>
+  <div class="cat-page-body">
+    <div class="cat-filters" id="catFilters"></div>
+    <div class="cat-products-grid" id="catProductsGrid"></div>
+  </div>
+  <!-- Footer repeated -->
+  <div class="delivery-banner" style="margin-top:0">
+    <div class="delivery-item"><div class="delivery-icon">🚚</div><div class="delivery-title">Twice Weekly Delivery</div><div class="delivery-text">Every Saturday & Tuesday — Zaria, Kaduna.</div></div>
+    <div class="delivery-item"><div class="delivery-icon">💬</div><div class="delivery-title">DM to Order</div><div class="delivery-text">Order here or DM @khadyy_ng on Instagram.</div></div>
+    <div class="delivery-item"><div class="delivery-icon">✅</div><div class="delivery-title">Verified Quality</div><div class="delivery-text">Every item inspected before delivery.</div></div>
+  </div>
+</div>
+
+<!-- ===== CART SIDEBAR ===== -->
+<div class="overlay-bg" id="overlayBg" onclick="toggleCart()"></div>
+<div class="cart-sidebar" id="cartSidebar">
+  <div class="cart-sidebar-header">
+    <div class="cart-sidebar-title">Your Cart 🛍️</div>
+    <button class="modal-close" onclick="toggleCart()">✕</button>
+  </div>
+  <div class="cart-sidebar-body" id="cartSidebarBody"></div>
+  <div class="cart-sidebar-footer">
+    <div class="cart-total"><span>Total</span><span id="cartTotal">₦0</span></div>
+    <button class="btn-primary" style="width:100%;text-align:center;margin-bottom:10px" onclick="toggleCart(); openOrderModal()">Proceed to Order</button>
+    <a href="https://instagram.com/khadyy_ng" target="_blank" class="dm-link-btn">📸 Order via Instagram DM</a>
+  </div>
+</div>
+
+<!-- ===== ORDER MODAL ===== -->
+<div class="modal-overlay" id="orderModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeOrderModal()">✕</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<!-- ===== PRODUCT DETAIL MODAL ===== -->
+<div class="modal-overlay" id="productModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeProductModal()">✕</button>
+    <div id="productModalContent"></div>
+  </div>
+</div>
+
+<!-- WhatsApp / Instagram Float -->
+<a href="https://instagram.com/khadyy_ng" target="_blank" class="whatsapp-float" title="Order on Instagram">📸</a>
+
+<script>
+// ===== DATA =====
+const products = {
+  bags: [
+    { id: 'b1', name: 'Luxury Tote Bag', price: 8500, oldPrice: 12000, emoji: '👜', cat: 'bags', badge: 'New', sub: 'Tote', desc: 'Premium quality tote bag perfect for everyday use. Available in multiple colours. DM to check availability.' },
+    { id: 'b2', name: 'Classic Handbag', price: 10000, emoji: '👝', cat: 'bags', badge: 'Hot', sub: 'Handbag', desc: 'Elegant classic handbag with gold hardware. Great for work or outings.' },
+    { id: 'b3', name: 'Mini Shoulder Bag', price: 6000, emoji: '👛', cat: 'bags', sub: 'Shoulder Bag', desc: 'Chic mini shoulder bag with adjustable strap.' },
+    { id: 'b4', name: 'Strawberry Tote', price: 8900, emoji: '🍓', cat: 'bags', badge: 'Trending', sub: 'Tote', desc: 'Cute strawberry print tote. Perfect gift item.' },
+    { id: 'b5', name: 'Structured Backpack', price: 12000, emoji: '🎒', cat: 'bags', sub: 'Backpack', desc: 'Stylish structured backpack in quilted design. Available in 5 colours.' },
+    { id: 'b6', name: 'Chain Crossbody Bag', price: 7500, emoji: '💼', cat: 'bags', badge: 'New', sub: 'Crossbody', desc: 'Trendy chain crossbody bag with moon clasp detail.' },
+    { id: 'b7', name: 'Dior-Style Mini Bag', price: 9500, emoji: '👜', cat: 'bags', sub: 'Mini Bag', desc: 'Gorgeous mini bag in Dior-inspired design. Multiple colours available.' },
+    { id: 'b8', name: 'Black Leather Tote', price: 11000, emoji: '🖤', cat: 'bags', sub: 'Tote', desc: 'Sleek all-black leather tote for the modern woman.' },
+  ],
+  shoes: [
+    { id: 's1', name: 'Bow Slide Sandals', price: 6500, emoji: '🩴', cat: 'shoes', badge: 'Hot', sub: 'Sandals', desc: 'Cute bow detail slide sandals. Very comfortable for daily wear.' },
+    { id: 's2', name: 'H-Strap Slippers', price: 5000, emoji: '👡', cat: 'shoes', badge: 'Trending', sub: 'Slippers', desc: 'Hermes-inspired H-strap slippers. Available in multiple colours.' },
+    { id: 's3', name: 'Orange Strappy Flats', price: 5500, emoji: '🧡', cat: 'shoes', sub: 'Flats', desc: 'Bold orange strappy flat sandals. Perfect summer footwear.' },
+    { id: 's4', name: 'Checkerboard Slides', price: 4500, emoji: '🏁', cat: 'shoes', sub: 'Slides', desc: 'Trendy checkerboard print slides. Casual and stylish.' },
+    { id: 's5', name: 'White Buckle Flats', price: 5500, emoji: '🤍', cat: 'shoes', sub: 'Flats', desc: 'Clean white buckle flats, perfect for any outfit.' },
+    { id: 's6', name: 'Pink Bow Slides', price: 6000, emoji: '🩷', cat: 'shoes', badge: 'New', sub: 'Slides', desc: 'Adorable pink bow slides — a fan favourite!' },
+    { id: 's7', name: 'Tan Platform Sandals', price: 7000, emoji: '👟', cat: 'shoes', sub: 'Platform', desc: 'Tan platform sandals with chunky sole for extra height.' },
+    { id: 's8', name: 'Multi-Strap Sandals', price: 5000, emoji: '🌈', cat: 'shoes', sub: 'Sandals', desc: 'Colourful multi-strap sandals available in 6 colours.' },
+  ],
+  beauty: [
+    { id: 'be1', name: 'Qasil Powder', price: 3500, emoji: '🌿', cat: 'beauty', badge: 'Popular', sub: 'Skincare', desc: 'Natural qasil powder — great for skin detox, brightening, and armpit scrub.' },
+    { id: 'be2', name: 'Body Lotion', price: 5000, emoji: '🧴', cat: 'beauty', sub: 'Bodycare', desc: 'Luxurious moisturising body lotion with long-lasting fragrance.' },
+    { id: 'be3', name: 'Fragrance Mist', price: 4500, emoji: '🌸', cat: 'beauty', badge: 'New', sub: 'Fragrance', desc: 'Light and refreshing body mist. Perfect for everyday use.' },
+    { id: 'be4', name: 'Face Massager', price: 7000, emoji: '💆‍♀️', cat: 'beauty', sub: 'Tools', desc: '5-in-1 facial care massager for glowing skin.' },
+    { id: 'be5', name: 'Strawberry Body Wash', price: 4000, emoji: '🍓', cat: 'beauty', sub: 'Bodycare', desc: 'O\'Lanney strawberry scented body wash. Smells amazing!' },
+    { id: 'be6', name: 'Lattafa Perfume', price: 9000, emoji: '✨', cat: 'beauty', badge: 'Luxury', sub: 'Perfume', desc: 'Authentic Lattafa Asad perfume. Long-lasting luxury scent.' },
+    { id: 'be7', name: 'Hair Care Set', price: 6500, emoji: '💇‍♀️', cat: 'beauty', sub: 'Haircare', desc: 'Complete hair care set for healthy, shiny hair.' },
+    { id: 'be8', name: 'Aloe Vera Lotion', price: 4000, emoji: '🌱', cat: 'beauty', sub: 'Skincare', desc: 'Soothing aloe vera collection love lotion.' },
+  ],
+  accessories: [
+    { id: 'a1', name: 'Cat Eye Sunglasses', price: 3500, emoji: '🕶️', cat: 'accessories', badge: 'Trending', sub: 'Sunglasses', desc: 'Stylish cat eye sunglasses — a timeless classic.' },
+    { id: 'a2', name: 'Oval Sunglasses', price: 3000, emoji: '😎', cat: 'accessories', sub: 'Sunglasses', desc: 'Chic oversized oval sunglasses. UV protection included.' },
+    { id: 'a3', name: 'Gold Bangle', price: 2500, emoji: '✨', cat: 'accessories', sub: 'Jewellery', desc: 'Elegant gold-toned bangle bracelet.' },
+    { id: 'a4', name: 'Barbie Wallet', price: 3500, emoji: '💕', cat: 'accessories', badge: 'Cute', sub: 'Wallets', desc: 'Fun Barbie-themed wallet available in pink, red, and yellow.' },
+    { id: 'a5', name: 'Card Wallet Set', price: 4000, emoji: '💳', cat: 'accessories', sub: 'Wallets', desc: 'Set of 3 patterned card wallets. Great as a gift!' },
+    { id: 'a6', name: 'Slim Sunglasses', price: 2800, emoji: '🌟', cat: 'accessories', sub: 'Sunglasses', desc: 'Sleek slim frame sunglasses for a modern look.' },
+  ],
+  veils: [
+    { id: 'v1', name: 'Dubai Jersey Veil', price: 4500, emoji: '🧣', cat: 'veils', badge: 'New', sub: 'Jersey', desc: 'Original Dubai jersey veil — smooth, breathable, and beautiful. Multiple colours.' },
+    { id: 'v2', name: 'Colour Veil Collection', price: 3500, emoji: '🌈', cat: 'veils', badge: 'Hot', sub: 'Jersey', desc: 'Available in over 15 gorgeous colours. DM to see full colour chart.' },
+    { id: 'v3', name: 'Premium Silk Hijab', price: 5500, emoji: '💎', cat: 'veils', sub: 'Silk', desc: 'Silky smooth premium hijab fabric. Elegant and lightweight.' },
+    { id: 'v4', name: 'Cotton Hijab', price: 2500, emoji: '🌸', cat: 'veils', sub: 'Cotton', desc: 'Breathable cotton hijab. Everyday comfort.' },
+  ],
+  bottles: [
+    { id: 'bo1', name: 'Stanley Style Tumbler', price: 7000, oldPrice: 9500, emoji: '🥤', cat: 'bottles', badge: 'Hot', sub: 'Tumbler', desc: 'Stanley-inspired tumbler with handle. Available in teal, pink, and more.' },
+    { id: 'bo2', name: 'Pink Stanley Tumbler', price: 7500, emoji: '🩷', cat: 'bottles', badge: 'New', sub: 'Tumbler', desc: 'Hot pink Stanley tumbler — a TikTok favourite!' },
+    { id: 'bo3', name: 'Lucky Day Water Bottle', price: 4500, emoji: '💧', cat: 'bottles', sub: 'Water Bottle', desc: 'Aesthetic Lucky Day water bottle. Keeps drinks cold for 12hrs.' },
+    { id: 'bo4', name: 'Youth Keep You Bottle', price: 3500, emoji: '🌸', cat: 'bottles', sub: 'Water Bottle', desc: 'Pastel pink motivational water bottle.' },
+    { id: 'bo5', name: 'Simple Jug Bottle', price: 4000, emoji: '🫙', cat: 'bottles', sub: 'Jug', desc: 'Large capacity simple jug with straw. Perfect for staying hydrated.' },
+    { id: 'bo6', name: 'Nice All Day Glass Cup', price: 3000, emoji: '🧊', cat: 'bottles', sub: 'Glass Cup', desc: 'Cute glass mason jar cup with striped straw.' },
+    { id: 'bo7', name: 'Hello Kitty Cup', price: 3500, emoji: '🌟', cat: 'bottles', badge: 'Cute', sub: 'Cup', desc: 'Adorable Hello Kitty glass cup. Great gift for kids & adults.' },
+    { id: 'bo8', name: 'Bear Handle Mug', price: 4000, emoji: '🐻', cat: 'bottles', sub: 'Mug', desc: 'Cute bear handle glass mug. Available in purple, grey, and blue.' },
+  ],
+  lifestyle: [
+    { id: 'l1', name: 'Flower Mirror', price: 5500, emoji: '🌸', cat: 'lifestyle', badge: 'Trendy', sub: 'Mirror', desc: 'Cute flower-shaped LED vanity mirror. Perfect for your desk.' },
+    { id: 'l2', name: 'Kawaii Notebook', price: 2500, emoji: '📓', cat: 'lifestyle', sub: 'Stationery', desc: 'Adorable kawaii notebook with cute character designs.' },
+    { id: 'l3', name: 'Gift Box Set', price: 10000, emoji: '🎁', cat: 'lifestyle', badge: 'Gift', sub: 'Gift Sets', desc: 'Elegant black gift box. Perfect for birthdays and special occasions.' },
+    { id: 'l4', name: 'Foldable Storage Basket', price: 3500, emoji: '🧺', cat: 'lifestyle', sub: 'Storage', desc: 'Colourful foldable crate storage basket. Very practical!' },
+    { id: 'l5', name: 'Cookies in a Jar', price: 5000, emoji: '🍪', cat: 'lifestyle', badge: 'Yummy', sub: 'Food Gifts', desc: 'Homemade cookies packed in a cute jar. Perfect gift idea.' },
+    { id: 'l6', name: 'Mini Flower Vase', price: 3000, emoji: '🌻', cat: 'lifestyle', sub: 'Decor', desc: 'Beautiful mini vase for your space. Available in 3 styles.' },
+  ],
+  sale: [
+    { id: 'sa1', name: 'Tote Bag (Sale)', price: 6000, oldPrice: 8500, emoji: '👜', cat: 'sale', badge: 'SALE', sub: 'Bags', desc: 'Tote bag on sale — grab it before it goes!' },
+    { id: 'sa2', name: 'Slides (Sale)', price: 3500, oldPrice: 5500, emoji: '🩴', cat: 'sale', badge: 'SALE', sub: 'Shoes', desc: 'Discounted slides in selected sizes and colours.' },
+    { id: 'sa3', name: 'Stanley Tumbler (Sale)', price: 5000, oldPrice: 7500, emoji: '🥤', cat: 'sale', badge: 'SALE', sub: 'Bottles', desc: 'Stanley tumbler on clearance. Limited stock!' },
+    { id: 'sa4', name: 'Crossbody Bag (Sale)', price: 5000, oldPrice: 7000, emoji: '👝', cat: 'sale', badge: 'SALE', sub: 'Bags', desc: 'Stylish crossbody bag at a discounted price.' },
+  ]
+};
+
+const categoryMeta = {
+  bags: { title: 'Premium <em>Bags</em>', sub: 'Totes, handbags, backpacks and more', filters: ['All', 'Tote', 'Handbag', 'Backpack', 'Shoulder Bag', 'Crossbody', 'Mini Bag'] },
+  shoes: { title: 'Trendy <em>Shoes</em>', sub: 'Slippers, sandals, flats and more', filters: ['All', 'Sandals', 'Slippers', 'Flats', 'Slides', 'Platform'] },
+  beauty: { title: 'Beauty & <em>Skincare</em>', sub: 'Skincare, fragrance, bodycare and tools', filters: ['All', 'Skincare', 'Bodycare', 'Fragrance', 'Tools', 'Perfume', 'Haircare'] },
+  accessories: { title: 'Fashion <em>Accessories</em>', sub: 'Sunglasses, jewellery, wallets and more', filters: ['All', 'Sunglasses', 'Jewellery', 'Wallets'] },
+  veils: { title: 'Veils & <em>Hijabs</em>', sub: 'Dubai jersey, silk, cotton and more', filters: ['All', 'Jersey', 'Silk', 'Cotton'] },
+  bottles: { title: 'Bottles & <em>Tumblers</em>', sub: 'Stanley tumblers, water bottles, cute cups', filters: ['All', 'Tumbler', 'Water Bottle', 'Glass Cup', 'Mug', 'Cup', 'Jug'] },
+  lifestyle: { title: 'Lifestyle & <em>Gifts</em>', sub: 'Stationery, mirrors, gift sets and more', filters: ['All', 'Mirror', 'Stationery', 'Gift Sets', 'Storage', 'Food Gifts', 'Decor'] },
+  sale: { title: '🏷️ <em>Sale</em> Items', sub: 'Up to 40% off selected items — limited stock!', filters: ['All', 'Bags', 'Shoes', 'Bottles'] },
+};
+
+// ===== CART =====
+let cart = [];
+
+function addToCart(productId) {
+  const product = findProduct(productId);
+  if (!product) return;
+  const existing = cart.find(i => i.id === productId);
+  if (existing) { existing.qty++; }
+  else { cart.push({ ...product, qty: 1 }); }
+  updateCartUI();
+  showAddedFeedback(productId);
+}
+
+function removeFromCart(productId) {
+  cart = cart.filter(i => i.id !== productId);
+  updateCartUI();
+}
+
+function changeQty(productId, delta) {
+  const item = cart.find(i => i.id === productId);
+  if (!item) return;
+  item.qty += delta;
+  if (item.qty <= 0) removeFromCart(productId);
+  else updateCartUI();
+}
+
+function findProduct(id) {
+  for (const cat of Object.values(products)) {
+    const p = cat.find(x => x.id === id);
+    if (p) return p;
+  }
+  return null;
+}
+
+function cartTotal() {
+  return cart.reduce((sum, i) => sum + i.price * i.qty, 0);
+}
+
+function updateCartUI() {
+  const count = cart.reduce((s, i) => s + i.qty, 0);
+  document.getElementById('cartCount').textContent = count;
+  document.getElementById('cartTotal').textContent = '₦' + cartTotal().toLocaleString();
+  renderCartSidebar();
+}
+
+function renderCartSidebar() {
+  const body = document.getElementById('cartSidebarBody');
+  if (cart.length === 0) {
+    body.innerHTML = '<div class="cart-empty">Your cart is empty.<br>Browse categories to add items! 🛍️</div>';
+    return;
+  }
+  body.innerHTML = cart.map(item => `
+    <div class="cart-sidebar-item">
+      <div class="cart-sidebar-emoji">${item.emoji}</div>
+      <div class="cart-sidebar-info">
+        <div class="cart-sidebar-name">${item.name}</div>
+        <div class="cart-sidebar-price">₦${(item.price * item.qty).toLocaleString()}</div>
+        <div class="qty-control">
+          <button class="qty-btn" onclick="changeQty('${item.id}',-1)">−</button>
+          <span class="qty-num">${item.qty}</span>
+          <button class="qty-btn" onclick="changeQty('${item.id}',1)">+</button>
+        </div>
+      </div>
+      <button class="cart-item-remove" onclick="removeFromCart('${item.id}')">🗑️</button>
+    </div>
+  `).join('');
+}
+
+function toggleCart() {
+  document.getElementById('cartSidebar').classList.toggle('open');
+  document.getElementById('overlayBg').classList.toggle('open');
+}
+
+function showAddedFeedback(id) {
+  const btn = document.querySelector(`[data-id="${id}"]`);
+  if (!btn) return;
+  btn.textContent = '✓';
+  btn.style.background = 'linear-gradient(135deg,#4caf50,#2e7d32)';
+  setTimeout(() => { btn.textContent = '+'; btn.style.background = ''; }, 1500);
+}
+
+// ===== PAGES =====
+function goHome() {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('homePage').classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function showCategoryPage(cat) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('categoryPage').classList.add('active');
+  window.scrollTo(0, 0);
+
+  const meta = categoryMeta[cat];
+  document.getElementById('catBreadcrumb').textContent = cat.charAt(0).toUpperCase() + cat.slice(1);
+  document.getElementById('catPageTitle').innerHTML = meta.title;
+  document.getElementById('catPageSub').textContent = meta.sub;
+
+  // Filters
+  const filtersEl = document.getElementById('catFilters');
+  filtersEl.innerHTML = '<span class="cat-filter-label">Filter:</span>' +
+    meta.filters.map(f => `<button class="filter-btn ${f==='All'?'active':''}" onclick="filterCatProducts('${cat}','${f}',this)">${f}</button>`).join('');
+
+  renderCatProducts(cat, 'All');
+}
+
+function filterCatProducts(cat, filter, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderCatProducts(cat, filter);
+}
+
+function renderCatProducts(cat, filter) {
+  const grid = document.getElementById('catProductsGrid');
+  const items = products[cat] || [];
+  const filtered = filter === 'All' ? items : items.filter(p => p.sub === filter);
+  grid.innerHTML = filtered.map(p => productCardHTML(p)).join('');
+}
+
+// ===== RENDER PRODUCT CARD =====
+function productCardHTML(p) {
+  const bgIndex = Math.abs(p.id.charCodeAt(0) + p.id.charCodeAt(1)) % 4 + 1;
+  const bg = ['#fde8f1,#f2a7c3','#ede0ff,#c084e0','#fde8f1,#e0749e','#ede0ff,#9b72cf'][bgIndex-1];
+  return `
+    <div class="product-card" onclick="openProductDetail('${p.id}')">
+      <div class="product-img" style="background:linear-gradient(135deg,${bg})">
+        ${p.emoji}
+        ${p.badge ? `<div class="product-badge">${p.badge}</div>` : ''}
+        <button class="wishlist-btn" onclick="event.stopPropagation(); this.textContent=this.textContent==='🤍'?'❤️':'🤍'">🤍</button>
+      </div>
+      <div class="product-info">
+        <div class="product-cat">${p.cat}</div>
+        <div class="product-name">${p.name}</div>
+        <div class="product-footer">
+          <div class="product-price">₦${p.price.toLocaleString()}${p.oldPrice?`<s>₦${p.oldPrice.toLocaleString()}</s>`:''}</div>
+          <button class="add-to-cart" data-id="${p.id}" onclick="event.stopPropagation(); addToCart('${p.id}')">+</button>
+        </div>
+      </div>
+    </div>`;
+}
+
+// Render featured
+function renderFeatured() {
+  const featured = [
+    products.bags[0], products.shoes[0], products.accessories[0], products.veils[0],
+    products.bottles[0], products.beauty[0], products.bags[2], products.lifestyle[2]
+  ];
+  document.getElementById('featuredGrid').innerHTML = featured.map(p => productCardHTML(p)).join('');
+}
+
+// ===== PRODUCT DETAIL =====
+function openProductDetail(id) {
+  const p = findProduct(id);
+  if (!p) return;
+  const bg = ['#fde8f1,#f2a7c3','#ede0ff,#c084e0','#fde8f1,#e0749e','#ede0ff,#9b72cf'][0];
+  document.getElementById('productModalContent').innerHTML = `
+    <div class="product-detail">
+      <div class="product-detail-img" style="background:linear-gradient(135deg,${bg})">${p.emoji}</div>
+      <div class="product-detail-cat">${p.cat.toUpperCase()}</div>
+      <div class="product-detail-name">${p.name}</div>
+      <div class="product-detail-price">₦${p.price.toLocaleString()}${p.oldPrice?` <s style="font-size:14px;color:var(--text-light);font-weight:400">₦${p.oldPrice.toLocaleString()}</s>`:''}</div>
+      <div class="product-detail-desc">${p.desc}</div>
+      <div class="product-detail-btns">
+        <button class="btn-primary" onclick="addToCart('${p.id}'); closeProductModal();">Add to Cart 🛍️</button>
+        <a href="https://instagram.com/khadyy_ng" target="_blank" class="btn-secondary">DM to Order 📸</a>
+      </div>
+      <div class="order-note">📍 Delivery: Saturday & Tuesday — Zaria, Kaduna | DM @khadyy_ng on Instagram to order</div>
+    </div>`;
+  document.getElementById('productModal').classList.add('open');
+}
+
+function closeProductModal() {
+  document.getElementById('productModal').classList.remove('open');
+}
+
+// ===== ORDER MODAL =====
+function openOrderModal() {
+  if (cart.length === 0) {
+    document.getElementById('modalContent').innerHTML = renderOrderFormHTML('empty');
+  } else {
+    document.getElementById('modalContent').innerHTML = renderOrderFormHTML('filled');
+  }
+  document.getElementById('orderModal').classList.add('open');
+  setupMethodTabs();
+}
+
+function closeOrderModal() {
+  document.getElementById('orderModal').classList.remove('open');
+}
+
+function renderOrderFormHTML(mode) {
+  const cartHTML = cart.length === 0
+    ? `<div class="cart-empty">No items in cart yet. <a href="#" style="color:var(--purple-deep)" onclick="closeOrderModal()">Browse categories →</a></div>`
+    : `<div class="cart-items">${cart.map(i => `
+        <div class="cart-item">
+          <div class="cart-item-emoji">${i.emoji}</div>
+          <div class="cart-item-info">
+            <div class="cart-item-name">${i.name} ×${i.qty}</div>
+            <div class="cart-item-price">₦${(i.price*i.qty).toLocaleString()}</div>
+          </div>
+          <button class="cart-item-remove" onclick="removeFromCart('${i.id}'); openOrderModal()">✕</button>
+        </div>`).join('')}
+      </div>`;
+
+  return `
+    <div class="modal-tag">Place Your Order</div>
+    <div class="modal-title">Order <em>Details</em></div>
+    <div class="modal-subtitle">Fill in your details below or order via Instagram DM. We'll confirm and send payment info.</div>
+    
+    ${cartHTML}
+    
+    ${cart.length > 0 ? `
+    <div class="order-summary">
+      ${cart.map(i=>`<div class="order-summary-row"><span>${i.name} ×${i.qty}</span><span>₦${(i.price*i.qty).toLocaleString()}</span></div>`).join('')}
+      <div class="order-summary-row"><span>Total</span><span>₦${cartTotal().toLocaleString()}</span></div>
+    </div>` : ''}
+
+    <div class="order-method-tabs">
+      <button class="method-tab active" data-tab="website">🌐 Order on Website</button>
+      <button class="method-tab" data-tab="instagram">📸 Order via DM</button>
+    </div>
+
+    <div id="websiteForm">
+      <div class="order-form-group">
+        <label class="order-form-label">Full Name</label>
+        <input type="text" class="order-input" id="orderName" placeholder="Your full name">
+      </div>
+      <div class="order-form-group">
+        <label class="order-form-label">Phone Number</label>
+        <input type="tel" class="order-input" id="orderPhone" placeholder="e.g. 08012345678">
+      </div>
+      <div class="order-form-group">
+        <label class="order-form-label">Delivery Address</label>
+        <input type="text" class="order-input" id="orderAddress" placeholder="Your full delivery address">
+      </div>
+      <div class="order-form-group">
+        <label class="order-form-label">Items / Notes (if not added to cart)</label>
+        <textarea class="order-input" id="orderNotes" rows="3" placeholder="Describe what you want to order, colours, sizes etc..." style="resize:vertical"></textarea>
+      </div>
+      <button class="submit-order" onclick="submitOrder()">Submit Order 🛍️</button>
+    </div>
+
+    <div id="dmForm" style="display:none">
+      <div style="background:var(--gradient-soft);border-radius:16px;padding:24px;text-align:center;margin-bottom:16px">
+        <div style="font-size:40px;margin-bottom:12px">📸</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--dark);margin-bottom:8px">@khadyy_ng</div>
+        <div style="font-size:13px;color:var(--text-light);line-height:1.6;margin-bottom:16px">Send a DM on Instagram with your order details — items, colours, sizes, and your location.</div>
+        <a href="https://instagram.com/khadyy_ng" target="_blank" class="btn-primary" style="display:inline-block">Open Instagram DM →</a>
+      </div>
+      <div style="text-align:center;font-size:12px;color:var(--text-light)">✅ Fast replies · 🚚 Delivery Sat & Tue · 💳 Bank transfer payment</div>
+    </div>
+
+    <div class="order-note">📍 Zaria, Kaduna based · Delivery every Saturday & Tuesday · No physical store</div>`;
+}
+
+function setupMethodTabs() {
+  document.querySelectorAll('.method-tab').forEach(tab => {
+    tab.addEventListener('click', function() {
+      document.querySelectorAll('.method-tab').forEach(t => t.classList.remove('active'));
+      this.classList.add('active');
+      const t = this.dataset.tab;
+      document.getElementById('websiteForm').style.display = t === 'website' ? 'block' : 'none';
+      document.getElementById('dmForm').style.display = t === 'instagram' ? 'block' : 'none';
+    });
+  });
+}
+
+function submitOrder() {
+  const name = document.getElementById('orderName').value.trim();
+  const phone = document.getElementById('orderPhone').value.trim();
+  const address = document.getElementById('orderAddress').value.trim();
+  const notes = document.getElementById('orderNotes').value.trim();
+
+  if (!name || !phone || !address) {
+    alert('Please fill in your name, phone number, and delivery address.');
+    return;
+  }
+
+  const itemsList = cart.length > 0
+    ? cart.map(i => `• ${i.name} ×${i.qty} — ₦${(i.price*i.qty).toLocaleString()}`).join('\n')
+    : notes || 'No items specified';
+
+  // Compose Instagram DM message
+  const message = encodeURIComponent(
+    `Hello Khadyy! 👋\n\nI'd like to place an order:\n\n${itemsList}\n\nTotal: ₦${cartTotal().toLocaleString()}\n\nName: ${name}\nPhone: ${phone}\nAddress: ${address}${notes?'\nNotes: '+notes:''}\n\nPlease confirm availability and payment details. Thank you! 💜`
+  );
+
+  document.getElementById('modalContent').innerHTML = `
+    <div class="order-success">
+      <div class="success-icon">🎉</div>
+      <div class="success-title">Order <em style="font-style:italic;color:var(--purple-deep)">Received!</em></div>
+      <div class="success-text">
+        Thank you, <strong>${name}</strong>! Your order has been submitted.<br><br>
+        To complete your order, please send a DM to <strong>@khadyy_ng</strong> on Instagram so Khadyy can confirm availability and send payment details.
+      </div>
+      <a href="https://instagram.com/khadyy_ng" target="_blank" class="btn-primary" style="display:inline-block;margin-bottom:12px">📸 Message @khadyy_ng</a>
+      <br>
+      <button class="btn-secondary" onclick="cart=[]; updateCartUI(); closeOrderModal();">Done</button>
+    </div>`;
+}
+
+// ===== SCROLL REVEAL =====
+function initScrollReveal() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.category-card,.product-card,.testimonial-card,.step-card,.stat-item').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(22px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
+}
+
+// Click outside modal to close
+document.getElementById('orderModal').addEventListener('click', function(e) {
+  if (e.target === this) closeOrderModal();
+});
+document.getElementById('productModal').addEventListener('click', function(e) {
+  if (e.target === this) closeProductModal();
+});
+
+// INIT
+renderFeatured();
+updateCartUI();
+renderCartSidebar();
+setTimeout(initScrollReveal, 100);
+</script>
+</body>
+</html>
